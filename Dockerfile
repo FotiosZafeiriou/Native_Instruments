@@ -1,11 +1,14 @@
-# Use the official NGINX image from Docker Hub
-FROM nginx
+# Use an official Nginx image as the base image
+FROM nginx:alpine
 
-# Copy the custom NGINX configuration file to the container
-COPY nginx.conf /etc/nginx/nginx.conf
+# Copy the website files to the container
+COPY . /usr/share/nginx/html
 
-# Expose port 80 for HTTP traffic
+# Set the working directory to the website files
+WORKDIR /usr/share/nginx/html
+
+# Expose port 80 for web traffic
 EXPOSE 80
 
-# Start NGINX when the container is run
+# Start the Nginx server
 CMD ["nginx", "-g", "daemon off;"]
